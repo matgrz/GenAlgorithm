@@ -94,6 +94,7 @@
     <ClCompile Include="algorithm\mutation\OnePointMutator.cpp" />
     <ClCompile Include="algorithm\PopulationManager.cpp" />
     <ClCompile Include="algorithm\selection\BestIndividualSelector.cpp" />
+    <ClCompile Include="algorithm\selection\RouletteSelector.cpp" />
     <ClCompile Include="algorithm\selection\TournamentSelector.cpp" />
     <ClCompile Include="algorithm\ServicesFactory.cpp" />
     <ClCompile Include="GenAlgorithm.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="algorithm\PopulationManager.h" />
     <ClInclude Include="algorithm\selection\BestIndividualSelector.h" />
     <ClInclude Include="algorithm\selection\ISelector.h" />
+    <ClInclude Include="algorithm\selection\RouletteSelector.h" />
     <ClInclude Include="algorithm\selection\TournamentSelector.h" />
     <ClInclude Include="algorithm\ServicesFactory.h" />
     <ClInclude Include="algorithm\types\Bitset.h" />

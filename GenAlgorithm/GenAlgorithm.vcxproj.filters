@@ -70,6 +70,9 @@
     <ClCompile Include="algorithm\mutation\BoundaryMutator.cpp">
       <Filter>algorithm\mutation</Filter>
     </ClCompile>
+    <ClCompile Include="algorithm\selection\RouletteSelector.cpp">
+      <Filter>algorithm\selection</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="GenAlgorithm.h">
@@ -137,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="algorithm\mutation\OnePointMutator.h">
       <Filter>algorithm\mutation</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithm\selection\RouletteSelector.h">
+      <Filter>algorithm\selection</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

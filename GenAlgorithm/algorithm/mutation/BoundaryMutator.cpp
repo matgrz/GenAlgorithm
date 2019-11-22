@@ -4,7 +4,7 @@ namespace algorithm
 {
 namespace mutation
 {
-	BoundaryMutator::BoundaryMutator(int mutationPercentage) : IMutator{ mutationPercentage }
+BoundaryMutator::BoundaryMutator(int mutationPercentage) : IMutator{ mutationPercentage }
 {
 }
 

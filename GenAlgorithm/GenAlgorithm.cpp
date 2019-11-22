@@ -33,11 +33,11 @@ void GenAlgorithm::handleRunButton()
 void GenAlgorithm::handleSelectionMethodsGroupBox()
 {
 	if (radioMs1->isChecked())
-		std::cout << "MS1" << "\n";
+		ui.labelSelectionInfo->setText("Saved creatures [%]");
 	if (radioMs2->isChecked())
-		std::cout << "MS2" << "\n";
+		ui.labelSelectionInfo->setText("Roulette kill count");
 	if (radioMs3->isChecked())
-		std::cout << "MS3" << "\n";
+		ui.labelSelectionInfo->setText("Single tournament size");
 }
 
 void GenAlgorithm::handleRunChartButton()

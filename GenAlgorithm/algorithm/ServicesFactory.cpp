@@ -1,6 +1,7 @@
 #include "ServicesFactory.h"
 
 #include "selection/BestIndividualSelector.h"
+#include "selection/RouletteSelector.h"
 #include "selection/TournamentSelector.h"
 #include "crossover/OnePointCrossover.h"
 #include "mutation/BoundaryMutator.h"
@@ -14,6 +15,8 @@ ServicesFactory::createSelector(types::SelectionMethods selectionMethod, int sel
 	{
 	case types::SelectionMethods::BEST_ONES:
 		return std::make_unique<selection::BestIndividualSelector>(selectionParam);
+	case types::SelectionMethods::ROULETTE_WHEEL:
+		return std::make_unique<selection::RouletteSelector>(selectionParam);
 	default:
 		return std::make_unique<selection::BestIndividualSelector>(selectionParam);;
 	}

@@ -9,7 +9,8 @@ BestIndividualSelector::BestIndividualSelector(const int percentage)
 {
 }
 
-std::map<float, types::Point>  BestIndividualSelector::select(const std::map<float, types::Point>& results) const
+std::map<float, types::Point>  
+BestIndividualSelector::select(const std::map<float, types::Point>& results) const
 {
 	std::map<float, types::Point> selectedResults = results;
 	const int deletedCreaturesCount = results.size() -  static_cast<int>(percentage / 100.0 * results.size());
