@@ -19,7 +19,7 @@ ServicesFactory::createSelector(types::SelectionMethods selectionMethod, int sel
     case types::SelectionMethods::ROULETTE_WHEEL:
         return std::make_unique<selection::RouletteSelector>(selectionParam);
     default:
-        return std::make_unique<selection::BestIndividualSelector>(selectionParam);;
+        return std::make_unique<selection::TournamentSelector>(selectionParam);;
     }
 }
 

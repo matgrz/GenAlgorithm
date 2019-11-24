@@ -36,9 +36,6 @@ void PopulationManager::findTheBestSolution()
 
         // 2. selection
         auto selectedResults = selector->select(results);
-        std::cout << "SELECTED RESULTS:\n";
-        for (auto pair : selectedResults)
-            std::cout << "DBG: " << pair.first << "\n";
 
         // 3. crossover
         types::Population selectedPopulation{};	// TODO extract a method
