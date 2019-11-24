@@ -9,6 +9,7 @@
 #include "selection/ISelector.h"
 #include "crossover/ICrossover.h"
 #include "mutation/IMutator.h"
+#include "Inverter.h"
 
 namespace algorithm
 {
@@ -29,6 +30,7 @@ private:
 	std::unique_ptr<selection::ISelector> selector;
 	std::unique_ptr<crossover::ICrossover> crossover;
 	std::unique_ptr<mutation::IMutator> mutator;
+    std::unique_ptr<Inverter> inverter;
 	const float xMin{ -10.0 };
 	const float xMax{ 10.0 };
 	const float yMin{ -10.0 };

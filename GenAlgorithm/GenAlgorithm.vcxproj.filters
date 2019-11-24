@@ -73,6 +73,9 @@
     <ClCompile Include="algorithm\mutation\PointMutator.cpp">
       <Filter>algorithm\mutation</Filter>
     </ClCompile>
+    <ClCompile Include="algorithm\Inverter.cpp">
+      <Filter>algorithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="GenAlgorithm.h">
@@ -143,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="algorithm\mutation\PointMutator.h">
       <Filter>algorithm\mutation</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithm\Inverter.h">
+      <Filter>algorithm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

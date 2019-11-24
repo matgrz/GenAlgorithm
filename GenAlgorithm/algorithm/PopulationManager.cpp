@@ -18,6 +18,7 @@ PopulationManager::PopulationManager(const types::InputData& input)
 	selector = factory.createSelector(input.selectionMethod, input.selectionParameter);
 	crossover = factory.createCrossover(input.crossoverMethod, input.crossoverProbability);
 	mutator = factory.createMutator(input.mutationMethod, input.mutationProbability);
+    inverter = std::make_unique<Inverter>(input.inversionProbability);
 }
 
 void PopulationManager::findTheBestSolution()
@@ -53,7 +54,10 @@ void PopulationManager::findTheBestSolution()
 		auto populationAfterCrossover = crossover->doCrossover(selectedPopulation);
 
 		// 4. mutation
-		mutator->mutatePopulation(populationAfterCrossover);
+		mutator->mutatePopulation(populationAfterCrossover);  
+
+        // inversion
+        inverter->performInversion(population);
 
 		// add: elite strategy
 		population = addElitesToPopulationIfNecessary(populationAfterCrossover, elites);

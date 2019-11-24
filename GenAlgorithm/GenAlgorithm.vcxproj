@@ -90,6 +90,7 @@
   <ItemGroup>
     <ClCompile Include="algorithm\crossover\OnePointCrossover.cpp" />
     <ClCompile Include="algorithm\InputDataParser.cpp" />
+    <ClCompile Include="algorithm\Inverter.cpp" />
     <ClCompile Include="algorithm\mutation\BoundaryMutator.cpp" />
     <ClCompile Include="algorithm\mutation\PointMutator.cpp" />
     <ClCompile Include="algorithm\PopulationManager.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="algorithm\crossover\ICrossover.h" />
     <ClInclude Include="algorithm\crossover\OnePointCrossover.h" />
     <ClInclude Include="algorithm\InputDataParser.h" />
+    <ClInclude Include="algorithm\Inverter.h" />
     <ClInclude Include="algorithm\mutation\BoundaryMutator.h" />
     <ClInclude Include="algorithm\mutation\IMutator.h" />
     <ClInclude Include="algorithm\mutation\PointMutator.h" />
