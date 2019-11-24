@@ -91,7 +91,7 @@
     <ClCompile Include="algorithm\crossover\OnePointCrossover.cpp" />
     <ClCompile Include="algorithm\InputDataParser.cpp" />
     <ClCompile Include="algorithm\mutation\BoundaryMutator.cpp" />
-    <ClCompile Include="algorithm\mutation\OnePointMutator.cpp" />
+    <ClCompile Include="algorithm\mutation\PointMutator.cpp" />
     <ClCompile Include="algorithm\PopulationManager.cpp" />
     <ClCompile Include="algorithm\selection\BestIndividualSelector.cpp" />
     <ClCompile Include="algorithm\selection\RouletteSelector.cpp" />
@@ -115,7 +115,7 @@
     <ClInclude Include="algorithm\InputDataParser.h" />
     <ClInclude Include="algorithm\mutation\BoundaryMutator.h" />
     <ClInclude Include="algorithm\mutation\IMutator.h" />
-    <ClInclude Include="algorithm\mutation\OnePointMutator.h" />
+    <ClInclude Include="algorithm\mutation\PointMutator.h" />
     <ClInclude Include="algorithm\PopulationManager.h" />
     <ClInclude Include="algorithm\selection\BestIndividualSelector.h" />
     <ClInclude Include="algorithm\selection\ISelector.h" />

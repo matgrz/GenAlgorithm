@@ -3,6 +3,7 @@
 #include "algorithm/PopulationManager.h"
 
 #include <iostream>
+#include <chrono>
 #include <QtCharts>
 
 GenAlgorithm::GenAlgorithm(QWidget *parent)
@@ -11,13 +12,10 @@ GenAlgorithm::GenAlgorithm(QWidget *parent)
 	ui.setupUi(this);
 	runButton = ui.pushButtonRun;
 	runChartButton = ui.pushButtonRunChart;
-	radioMs1 = ui.radioButtonMS1;
-	radioMs2 = ui.radioButtonMS2;
-	radioMs3 = ui.radioButtonMS3;
 
-	connect(radioMs1, SIGNAL(released()), this, SLOT(handleSelectionMethodsGroupBox()));
-	connect(radioMs2, SIGNAL(released()), this, SLOT(handleSelectionMethodsGroupBox()));
-	connect(radioMs3, SIGNAL(released()), this, SLOT(handleSelectionMethodsGroupBox()));
+	connect(ui.radioButtonMS1, SIGNAL(released()), this, SLOT(handleSelectionMethodsGroupBox()));
+	connect(ui.radioButtonMS2, SIGNAL(released()), this, SLOT(handleSelectionMethodsGroupBox()));
+	connect(ui.radioButtonMS3, SIGNAL(released()), this, SLOT(handleSelectionMethodsGroupBox()));
 
 	connect(runButton, SIGNAL(released()), this, SLOT(handleRunButton()));
 	connect(runChartButton, SIGNAL(released()), this, SLOT(handleRunChartButton()));
@@ -25,18 +23,24 @@ GenAlgorithm::GenAlgorithm(QWidget *parent)
 
 void GenAlgorithm::handleRunButton()
 {
+	using namespace std::chrono;
+	auto startTime = steady_clock::now();
 	const auto inputData = algorithm::InputDataParser{}.parseData(ui);
 	auto populationManager = std::make_unique<algorithm::PopulationManager>(inputData);
 	populationManager->findTheBestSolution();
+
+	auto endTime = steady_clock::now();
+	std::string elapsedTime = "Elapsed time (miliseconds): " + std::to_string(duration_cast<milliseconds>(endTime - startTime).count());
+	ui.labelExecutionTime->setText(elapsedTime.c_str());
 }
 
 void GenAlgorithm::handleSelectionMethodsGroupBox()
 {
-	if (radioMs1->isChecked())
+	if (ui.radioButtonMS1->isChecked())
 		ui.labelSelectionInfo->setText("Saved creatures [%]");
-	if (radioMs2->isChecked())
+	if (ui.radioButtonMS2->isChecked())
 		ui.labelSelectionInfo->setText("Roulette kill count");
-	if (radioMs3->isChecked())
+	if (ui.radioButtonMS3->isChecked())
 		ui.labelSelectionInfo->setText("Single tournament size");
 }
 
@@ -60,10 +64,6 @@ void GenAlgorithm::handleRunChartButton()
 	QChartView* chartView = new QChartView(chart);
 	chartView->setRenderHint(QPainter::Antialiasing);
 
-	//QMainWindow window;
-	//window.setCentralWidget(chartView);
-	//window.resize(400, 300);
-	//window.show();
 	QWidget* chartWindow = new QWidget(0);
 
 	QVBoxLayout* layout = new QVBoxLayout(chartWindow);

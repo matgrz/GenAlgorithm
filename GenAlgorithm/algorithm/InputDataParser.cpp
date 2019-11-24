@@ -45,10 +45,10 @@ types::Crossovers InputDataParser::parseCrossoverMethod(const Ui::GenAlgorithmCl
 types::Mutations InputDataParser::parseMutationMethod(const Ui::GenAlgorithmClass& ui)
 {
 	if (ui.radioButtonMutation1->isChecked())
-		return types::Mutations::ONE_POINT;
-	else if (ui.radioButtonMutation2->isChecked())
-		return types::Mutations::TWO_POINT;
-	else
 		return types::Mutations::BOUNDARY;
+	else if (ui.radioButtonMutation2->isChecked())
+		return types::Mutations::ONE_POINT;
+	else
+		return types::Mutations::TWO_POINT;
 }
 }

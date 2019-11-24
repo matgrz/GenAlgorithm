@@ -17,9 +17,6 @@ private:
 	Ui::GenAlgorithmClass ui;
 	QPushButton* runButton;
 	QPushButton* runChartButton;
-	QRadioButton* radioMs1;
-	QRadioButton* radioMs2;
-	QRadioButton* radioMs3;
 
 private slots:
 	void handleRunButton();

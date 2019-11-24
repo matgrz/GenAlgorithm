@@ -64,14 +64,14 @@
     <ClCompile Include="algorithm\crossover\OnePointCrossover.cpp">
       <Filter>algorithm\crossover</Filter>
     </ClCompile>
-    <ClCompile Include="algorithm\mutation\OnePointMutator.cpp">
-      <Filter>algorithm\mutation</Filter>
-    </ClCompile>
     <ClCompile Include="algorithm\mutation\BoundaryMutator.cpp">
       <Filter>algorithm\mutation</Filter>
     </ClCompile>
     <ClCompile Include="algorithm\selection\RouletteSelector.cpp">
       <Filter>algorithm\selection</Filter>
+    </ClCompile>
+    <ClCompile Include="algorithm\mutation\PointMutator.cpp">
+      <Filter>algorithm\mutation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -138,11 +138,11 @@
     <ClInclude Include="algorithm\mutation\IMutator.h">
       <Filter>algorithm\mutation</Filter>
     </ClInclude>
-    <ClInclude Include="algorithm\mutation\OnePointMutator.h">
-      <Filter>algorithm\mutation</Filter>
-    </ClInclude>
     <ClInclude Include="algorithm\selection\RouletteSelector.h">
       <Filter>algorithm\selection</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithm\mutation\PointMutator.h">
+      <Filter>algorithm\mutation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
