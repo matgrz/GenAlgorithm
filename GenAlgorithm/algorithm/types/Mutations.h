@@ -6,9 +6,9 @@ namespace types
 {
 enum class Mutations
 {
-	BOUNDARY = 0,
-	ONE_POINT,
-	TWO_POINT
+    BOUNDARY = 0,
+    ONE_POINT,
+    TWO_POINT
 };
 }
 }

@@ -10,8 +10,8 @@ namespace selection
 class ISelector
 {
 public:
-	virtual ~ISelector() = default;
-	virtual std::map<float, types::Point> select(const std::map<float, types::Point>&) const = 0;
+    virtual ~ISelector() = default;
+    virtual std::map<float, types::Point> select(const std::map<float, types::Point>&) const = 0;
 };
 }
 }

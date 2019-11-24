@@ -9,11 +9,11 @@ namespace selection
 class TournamentSelector : public ISelector
 {
 public:
-	TournamentSelector(const int tournamentSize);
-	std::map<float, types::Point> select(const std::map<float, types::Point>&) const  override;
+    TournamentSelector(const int tournamentSize);
+    std::map<float, types::Point> select(const std::map<float, types::Point>&) const  override;
 
 private:
-	const int tournamentSize;
+    const int tournamentSize;
 };
 }
 }
