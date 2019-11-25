@@ -69,6 +69,14 @@ namespace types
         return this->toString() == rhs.toString();
     }
 
+    Bitset operator+(const Bitset& rhs)
+    {
+        auto lhsValue = this->value;
+        auto rhsValue = rhs.getValue();
+        lhsValue.insert(lhsValue.end(), rhsValue.begin(), rhsValue.end());
+        return Bitset{ lhsValue };
+    }
+
     void doCrossover(std::vector<bool> leftPart, std::vector<bool> rightPart)
     {
         value.insert(value.begin(), leftPart.begin(), leftPart.end());

@@ -4,6 +4,7 @@
 #include "selection/RouletteSelector.h"
 #include "selection/TournamentSelector.h"
 #include "crossover/OnePointCrossover.h"
+#include "crossover/TwoPointCrossover.h"
 #include "mutation/BoundaryMutator.h"
 #include "mutation/PointMutator.h"
 
@@ -26,8 +27,13 @@ ServicesFactory::createSelector(types::SelectionMethods selectionMethod, int sel
 std::unique_ptr<crossover::ICrossover> 
 ServicesFactory::createCrossover(types::Crossovers crossoverType, int crossoverProbability)
 {
-    // TODO switch
-    return std::make_unique<crossover::OnePointCrossover>(crossoverProbability);
+    switch (crossoverType)
+    {
+    case types::Crossovers::ONE_POINT:
+        return std::make_unique<crossover::OnePointCrossover>(crossoverProbability);
+    default:
+        return std::make_unique<crossover::TwoPointCrossover>(crossoverProbability);
+    }
 }
 std::unique_ptr<mutation::IMutator>
 ServicesFactory::createMutator(types::Mutations mutationType, int mutationProbability)

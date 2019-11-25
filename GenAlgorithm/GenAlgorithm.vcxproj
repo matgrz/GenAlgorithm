@@ -67,6 +67,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -89,6 +90,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="algorithm\crossover\OnePointCrossover.cpp" />
+    <ClCompile Include="algorithm\crossover\TwoPointCrossover.cpp" />
     <ClCompile Include="algorithm\InputDataParser.cpp" />
     <ClCompile Include="algorithm\Inverter.cpp" />
     <ClCompile Include="algorithm\mutation\BoundaryMutator.cpp" />
@@ -113,6 +115,7 @@
   <ItemGroup>
     <ClInclude Include="algorithm\crossover\ICrossover.h" />
     <ClInclude Include="algorithm\crossover\OnePointCrossover.h" />
+    <ClInclude Include="algorithm\crossover\TwoPointCrossover.h" />
     <ClInclude Include="algorithm\InputDataParser.h" />
     <ClInclude Include="algorithm\Inverter.h" />
     <ClInclude Include="algorithm\mutation\BoundaryMutator.h" />

@@ -14,7 +14,7 @@ OnePointCrossover::OnePointCrossover(int crossoverPercentage)
 
 types::Population OnePointCrossover::doCrossover(const types::Population& population)
 {
-    types::Population newCreatures{};
+    types::Population newPopulation{};
     const int popSize = population.size();
     const int lastIndexWhichEnablesCrossoverWithWorseCreature = popSize - 1;
 
@@ -23,12 +23,12 @@ types::Population OnePointCrossover::doCrossover(const types::Population& popula
         if (isCrossoverPicked())
         {
             int partnerIndex = getIndexOfRandomCreatureWorseThanCurrent(popSize, index);
-                newCreatures.push_back(crossoverTwoCreatures(population[index], population[partnerIndex]));
-            newCreatures.push_back(crossoverTwoCreatures(population[partnerIndex], population[index]));
+            newPopulation.push_back(crossoverTwoCreatures(population[index], population[partnerIndex]));
+            newPopulation.push_back(crossoverTwoCreatures(population[partnerIndex], population[index]));
         }
     }
-    std::copy(population.begin(), population.end(), std::back_inserter(newCreatures));
-    return newCreatures;
+    std::copy(population.begin(), population.end(), std::back_inserter(newPopulation));
+    return newPopulation;
 }
 
 int OnePointCrossover::getIndexOfRandomCreatureWorseThanCurrent(int popSize, int index)

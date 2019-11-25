@@ -76,6 +76,9 @@
     <ClCompile Include="algorithm\Inverter.cpp">
       <Filter>algorithm</Filter>
     </ClCompile>
+    <ClCompile Include="algorithm\crossover\TwoPointCrossover.cpp">
+      <Filter>algorithm\crossover</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="GenAlgorithm.h">
@@ -149,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="algorithm\Inverter.h">
       <Filter>algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithm\crossover\TwoPointCrossover.h">
+      <Filter>algorithm\crossover</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
