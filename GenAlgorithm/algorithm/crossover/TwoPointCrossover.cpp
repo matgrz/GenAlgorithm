@@ -1,7 +1,5 @@
 #include "TwoPointCrossover.h"
 
-#include <iostream>
-
 namespace algorithm
 {
 namespace crossover

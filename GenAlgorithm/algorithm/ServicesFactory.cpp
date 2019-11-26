@@ -5,6 +5,7 @@
 #include "selection/TournamentSelector.h"
 #include "crossover/OnePointCrossover.h"
 #include "crossover/TwoPointCrossover.h"
+#include "crossover/HomogeneousCrossover.h"
 #include "mutation/BoundaryMutator.h"
 #include "mutation/PointMutator.h"
 
@@ -31,8 +32,10 @@ ServicesFactory::createCrossover(types::Crossovers crossoverType, int crossoverP
     {
     case types::Crossovers::ONE_POINT:
         return std::make_unique<crossover::OnePointCrossover>(crossoverProbability);
-    default:
+    case types::Crossovers::TWO_POINT:
         return std::make_unique<crossover::TwoPointCrossover>(crossoverProbability);
+    default:
+        return std::make_unique<crossover::HomogeneousCrossover>(crossoverProbability);
     }
 }
 std::unique_ptr<mutation::IMutator>

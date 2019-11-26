@@ -8,7 +8,6 @@ namespace types
     {
         ONE_POINT = 0,
         TWO_POINT,
-        THREE_POINT,
         HOMOGENEOUS
     };
 }

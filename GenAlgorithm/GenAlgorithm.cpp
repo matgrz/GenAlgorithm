@@ -6,9 +6,8 @@
 #include <chrono>
 #include <QtCharts>
 
-GenAlgorithm::GenAlgorithm(QWidget *parent)
-    : QMainWindow(parent)
-    {
+GenAlgorithm::GenAlgorithm(QWidget *parent) : QMainWindow(parent)
+{
     ui.setupUi(this);
     runButton = ui.pushButtonRun;
     runChartButton = ui.pushButtonRunChart;

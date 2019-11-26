@@ -37,8 +37,6 @@ types::Crossovers InputDataParser::parseCrossoverMethod(const Ui::GenAlgorithmCl
         return types::Crossovers::ONE_POINT;
     else if (ui.radioButtonRecomb2->isChecked())
         return types::Crossovers::TWO_POINT;
-    else if (ui.radioButtonRecomb3->isChecked())
-        return types::Crossovers::THREE_POINT;
     else
         return types::Crossovers::HOMOGENEOUS;
 }

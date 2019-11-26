@@ -182,10 +182,10 @@
    <widget class="QGroupBox" name="groupBoxRecombination">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>230</x>
       <y>120</y>
-      <width>120</width>
-      <height>111</height>
+      <width>141</width>
+      <height>161</height>
      </rect>
     </property>
     <property name="title">
@@ -220,7 +220,7 @@
       <string>Two points</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButtonRecomb3">
+    <widget class="QRadioButton" name="radioButtonRecomb4">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -230,20 +230,33 @@
       </rect>
      </property>
      <property name="text">
-      <string>Three points</string>
+      <string>Homogenous</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButtonRecomb4">
+    <widget class="QTextEdit" name="textEditCrossoverProbability">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>120</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>6</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="labelCrossoverInfo">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>80</y>
-       <width>82</width>
-       <height>17</height>
+       <y>90</y>
+       <width>141</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="text">
-      <string>Homogenous</string>
+      <string>Crossover probability [%]</string>
      </property>
     </widget>
    </widget>
@@ -326,19 +339,6 @@
     </property>
     <property name="text">
      <string>Population size</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEditCrossoverProbability">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>250</y>
-      <width>81</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="placeholderText">
-     <string>6</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="textEditMutationProbability">
