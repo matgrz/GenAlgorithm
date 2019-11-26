@@ -48,7 +48,15 @@ void PopulationManager::findTheBestSolution()
             });
 
         // crossover call
+        std::cout << "Before crossover\n";
+        for (auto& cr : selectedPopulation)
+            std::cout << cr.first.toString() << "\n";
+
         auto populationAfterCrossover = crossover->doCrossover(selectedPopulation);
+
+        std::cout << "After crossover\n";
+        for (auto& cr : populationAfterCrossover)
+            std::cout << cr.first.toString() << "\n";
 
         // 4. mutation
         mutator->mutatePopulation(populationAfterCrossover);  

@@ -8,36 +8,11 @@ namespace algorithm
 namespace crossover
 {
 OnePointCrossover::OnePointCrossover(int crossoverPercentage)
-    : ICrossover{ crossoverPercentage }
+    : CrossoverProvider{ crossoverPercentage }
 {
 }
 
-types::Population OnePointCrossover::doCrossover(const types::Population& population)
-{
-    types::Population newPopulation{};
-    const int popSize = population.size();
-    const int lastIndexWhichEnablesCrossoverWithWorseCreature = popSize - 1;
-
-    for (int index = 0; index < lastIndexWhichEnablesCrossoverWithWorseCreature; index++)
-    {
-        if (isCrossoverPicked())
-        {
-            int partnerIndex = getIndexOfRandomCreatureWorseThanCurrent(popSize, index);
-            newPopulation.push_back(crossoverTwoCreatures(population[index], population[partnerIndex]));
-            newPopulation.push_back(crossoverTwoCreatures(population[partnerIndex], population[index]));
-        }
-    }
-    std::copy(population.begin(), population.end(), std::back_inserter(newPopulation));
-    return newPopulation;
-}
-
-int OnePointCrossover::getIndexOfRandomCreatureWorseThanCurrent(int popSize, int index)
-{
-    int randomIndexBase = std::rand() % (popSize - index);
-    return (randomIndexBase == 0 ? 1 : randomIndexBase) + index;
-}
-
-types::Point
+std::pair<types::Point, types::Point>
 OnePointCrossover::crossoverTwoCreatures(const types::Point& firstParent, const types::Point& secondParent)
 {
     auto firstX = firstParent.first.splitAtHalf();
@@ -50,7 +25,13 @@ OnePointCrossover::crossoverTwoCreatures(const types::Point& firstParent, const 
     std::vector<bool> newFirstY(firstY.first);
     newFirstY.insert(newFirstY.end(), secondY.second.begin(), secondY.second.end());
 
-    return { types::xValues{newFirstX}, types::yValues{newFirstY}} ;
+    std::vector<bool> newSecondX(secondX.first);
+    newSecondX.insert(newSecondX.end(), firstX.second.begin(), firstX.second.end());
+    std::vector<bool> newSecondY(secondY.first);
+    newSecondY.insert(newSecondY.end(), firstY.second.begin(), firstY.second.end());
+
+    return { {types::xValues{newFirstX}, types::yValues{newFirstY}},
+             {types::xValues{newSecondX}, types::yValues{newSecondY}} };
 }
 }
 }

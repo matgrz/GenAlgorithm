@@ -82,6 +82,9 @@
     <ClCompile Include="algorithm\crossover\HomogeneousCrossover.cpp">
       <Filter>algorithm\crossover</Filter>
     </ClCompile>
+    <ClCompile Include="algorithm\crossover\ICrossover.cpp">
+      <Filter>algorithm\crossover</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="GenAlgorithm.h">

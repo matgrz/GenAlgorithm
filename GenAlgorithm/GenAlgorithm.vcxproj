@@ -90,6 +90,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="algorithm\crossover\HomogeneousCrossover.cpp" />
+    <ClCompile Include="algorithm\crossover\ICrossover.cpp" />
     <ClCompile Include="algorithm\crossover\OnePointCrossover.cpp" />
     <ClCompile Include="algorithm\crossover\TwoPointCrossover.cpp" />
     <ClCompile Include="algorithm\InputDataParser.cpp" />
