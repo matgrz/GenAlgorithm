@@ -38,6 +38,9 @@
     <Filter Include="algorithm\mutation">
       <UniqueIdentifier>{1c478d82-e5d7-41af-b8a0-12a61d7de0c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="dataplotting">
+      <UniqueIdentifier>{77e48785-704e-4d2a-84ec-b031252adeae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -84,6 +87,9 @@
     </ClCompile>
     <ClCompile Include="algorithm\crossover\ICrossover.cpp">
       <Filter>algorithm\crossover</Filter>
+    </ClCompile>
+    <ClCompile Include="dataplotting\IterationValuePlotter.cpp">
+      <Filter>dataplotting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +170,9 @@
     </ClInclude>
     <ClInclude Include="algorithm\crossover\HomogeneousCrossover.h">
       <Filter>algorithm\crossover</Filter>
+    </ClInclude>
+    <ClInclude Include="dataplotting\IterationValuePlotter.h">
+      <Filter>dataplotting</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -102,6 +102,7 @@
     <ClCompile Include="algorithm\selection\RouletteSelector.cpp" />
     <ClCompile Include="algorithm\selection\TournamentSelector.cpp" />
     <ClCompile Include="algorithm\ServicesFactory.cpp" />
+    <ClCompile Include="dataplotting\IterationValuePlotter.cpp" />
     <ClCompile Include="GenAlgorithm.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -136,6 +137,7 @@
     <ClInclude Include="algorithm\types\Mutations.h" />
     <ClInclude Include="algorithm\types\Crossovers.h" />
     <ClInclude Include="algorithm\types\SelectionMethods.h" />
+    <ClInclude Include="dataplotting\IterationValuePlotter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

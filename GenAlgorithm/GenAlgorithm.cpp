@@ -1,6 +1,5 @@
 #include "GenAlgorithm.h"
 #include "algorithm/InputDataParser.h"
-#include "algorithm/PopulationManager.h"
 
 #include <iostream>
 #include <chrono>
@@ -9,15 +8,16 @@
 GenAlgorithm::GenAlgorithm(QWidget *parent) : QMainWindow(parent)
 {
     ui.setupUi(this);
-    runButton = ui.pushButtonRun;
-    runChartButton = ui.pushButtonRunChart;
 
     connect(ui.radioButtonMS1, SIGNAL(released()), this, SLOT(handleSelectionMethodsGroupBox()));
     connect(ui.radioButtonMS2, SIGNAL(released()), this, SLOT(handleSelectionMethodsGroupBox()));
     connect(ui.radioButtonMS3, SIGNAL(released()), this, SLOT(handleSelectionMethodsGroupBox()));
 
-    connect(runButton, SIGNAL(released()), this, SLOT(handleRunButton()));
-    connect(runChartButton, SIGNAL(released()), this, SLOT(handleRunChartButton()));
+    connect(ui.pushButtonRun, SIGNAL(released()), this, SLOT(handleRunButton()));
+    connect(ui.pushButtonRunChart, SIGNAL(released()), this, SLOT(handleRunChartButton()));
+    connect(ui.pushButtonRunChartMean, SIGNAL(released()), this, SLOT(handleRunChartMeanButton()));
+
+    plotter = std::make_unique<dataplotting::IterationValuePlotter>();
 }
 
 void GenAlgorithm::handleRunButton()
@@ -26,7 +26,10 @@ void GenAlgorithm::handleRunButton()
     auto startTime = steady_clock::now();
     const auto inputData = algorithm::InputDataParser{}.parseData(ui);
     auto populationManager = std::make_unique<algorithm::PopulationManager>(inputData);
-    populationManager->findTheBestSolution();
+    calculatedResults = populationManager->findTheBestSolution();
+    // TODO make chart generation buttons clickable method
+    ui.pushButtonRunChart->setEnabled(true);
+    ui.pushButtonRunChartMean->setEnabled(true);
 
     auto endTime = steady_clock::now();
     std::string elapsedTime = "Elapsed time (miliseconds): " + std::to_string(duration_cast<milliseconds>(endTime - startTime).count());
@@ -45,30 +48,10 @@ void GenAlgorithm::handleSelectionMethodsGroupBox()
 
 void GenAlgorithm::handleRunChartButton()
 {	
-    std::cout << "in run chart\n";
-    QLineSeries* series = new QLineSeries();
-    series->append(0, 6);
-    series->append(2, 4);
-    series->append(3, 8);
-    series->append(7, 4);
-    series->append(10, 5);
-    *series << QPointF(11, 1) << QPointF(13, 3) << QPointF(17, 6) << QPointF(18, 3) << QPointF(20, 2);
-	
-    QChart* chart = new QChart();
-    chart->legend()->hide();
-    chart->addSeries(series);
-    chart->createDefaultAxes();
-    chart->setTitle("Simple line chart example");
+    plotter->plotIterationResults(calculatedResults);
+}
 
-    QChartView* chartView = new QChartView(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
-
-    QWidget* chartWindow = new QWidget(0);
-
-    QVBoxLayout* layout = new QVBoxLayout(chartWindow);
-    layout->addWidget(chartView);
-    chartWindow->setLayout(layout);
-    layout->activate();
-    chartWindow->resize(480, 320);
-    chartWindow->show();
+void GenAlgorithm::handleRunChartMeanButton()
+{
+    plotter->plotMeanValue(calculatedResults);
 }

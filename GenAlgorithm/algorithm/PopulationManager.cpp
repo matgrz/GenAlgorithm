@@ -21,42 +21,31 @@ PopulationManager::PopulationManager(const types::InputData& input)
     inverter = std::make_unique<Inverter>(input.inversionProbability);
 }
 
-void PopulationManager::findTheBestSolution()
+auto PopulationManager::findTheBestSolution() const -> ResultsPerIteration
 {
+    ResultsPerIteration allResults{};
     auto population = initilizePopulation();
+    int iteration{ 0 };
 
-    for (int iteration = 0; iteration < input.generationCount; iteration++)
+    for (;;)
     {
         std::cout << " ----- ITERATION " << iteration << " ----- \n\n";
         // 1. evaluation
-        auto results = calculateValues(population);
+        auto results = calculateValuesAndStoreIt(population, allResults, iteration);
 
         // store elites
         auto elites = getElites(results);
 
         // 2. selection
         auto selectedResults = selector->select(results);
+        if (iteration++ == input.generationCount)
+            return allResults;
 
         // 3. crossover
-        types::Population selectedPopulation{};	// TODO extract a method
-        std::transform(selectedResults.begin(),
-            selectedResults.end(),
-            std::back_inserter(selectedPopulation),
-            [](auto& creature)
-            {
-                return creature.second;
-            });
+        types::Population selectedPopulation = convertResultsToPopulation(selectedResults);
 
         // crossover call
-        std::cout << "Before crossover\n";
-        for (auto& cr : selectedPopulation)
-            std::cout << cr.first.toString() << "\n";
-
         auto populationAfterCrossover = crossover->doCrossover(selectedPopulation);
-
-        std::cout << "After crossover\n";
-        for (auto& cr : populationAfterCrossover)
-            std::cout << cr.first.toString() << "\n";
 
         // 4. mutation
         mutator->mutatePopulation(populationAfterCrossover);  
@@ -67,6 +56,8 @@ void PopulationManager::findTheBestSolution()
         // add: elite strategy
         population = addElitesToPopulationIfNecessary(populationAfterCrossover, elites);
     }
+    // TODO add some exception handling
+    return {};
 }
 
 int PopulationManager::calculateBitsetLength() const
@@ -86,23 +77,49 @@ types::Population PopulationManager::initilizePopulation() const
     return population;
 }
 
-std::map<float, types::Point> 
-    PopulationManager::calculateValues(const types::Population& population) const
+std::map<float, types::Point> PopulationManager::calculateValuesAndStoreIt(
+    const types::Population& population, ResultsPerIteration& allResults, const int iteration) const
 {
     std::map<float, types::Point> values{};
-    const auto constFactor = (xMax - xMin) / (std::pow(2, calculateBitsetLength()) - 1);
+    std::set<types::ResultValues> resultsForThisIteration{};
 
+    const auto constFactor = (xMax - xMin) / (std::pow(2, calculateBitsetLength()) - 1);
     for (const auto& creature : population)
     {
         std::cout << "DBG: x str = " << creature.first.toString() << ", y str = " << creature.second.toString() << "\n";
-        auto x = xMin + creature.first.toDecimal() * constFactor;
-        auto y = xMin + creature.second.toDecimal() * constFactor;
-        float value = std::pow(x, 2) + 2 * std::pow(y, 2) - 0.3 * std::cos(3 * 3.14 * x) * std::cos(4 * 3.14 * y) - 0.3;
+        auto [x, y] = decodeBitsetsToFloats(creature, constFactor);
+        float value = calculateValue(x, y);
         std::cout << "DBG: x = " << x << ", y = " << y << ", value = " << value << "\n";
         values.insert({value, creature});
+        resultsForThisIteration.insert(types::ResultValues{x, y, value});
     }
-
+    allResults[iteration] = resultsForThisIteration;
     return values;
+}
+
+types::Population PopulationManager::convertResultsToPopulation(const std::map<float, types::Point>& selectedResults) const
+{
+    types::Population selectedPopulation{};
+    std::transform(selectedResults.begin(),
+                   selectedResults.end(),
+                   std::back_inserter(selectedPopulation),
+                   [](auto& creature) {
+                       return creature.second;
+                   });
+    return selectedPopulation;
+}
+
+float PopulationManager::calculateValue(float x, float y) const
+{
+    return std::pow(x, 2) + 2 * std::pow(y, 2) - 0.3 * std::cos(3 * 3.14 * x) * std::cos(4 * 3.14 * y) + 0.3;
+}
+
+std::pair<float, float>
+PopulationManager::decodeBitsetsToFloats(const types::Point& creature, float constFactor) const
+{
+    auto x = xMin + creature.first.toDecimal() * constFactor;
+    auto y = xMin + creature.second.toDecimal() * constFactor;
+    return {x, y};
 }
 
 types::Population PopulationManager::getElites(const std::map<float, types::Point>& results) const

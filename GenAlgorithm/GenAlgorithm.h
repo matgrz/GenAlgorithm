@@ -2,9 +2,11 @@
 
 #include <memory>
 #include <QtWidgets/QMainWindow>
-#include <QPushButton>
+#include <QtCharts>
 
 #include "ui_GenAlgorithm.h"
+#include "algorithm/PopulationManager.h"
+#include "dataplotting/IterationValuePlotter.h"
 
 class GenAlgorithm : public QMainWindow
 {
@@ -15,11 +17,12 @@ public:
 	
 private:
     Ui::GenAlgorithmClass ui;
-    QPushButton* runButton;
-    QPushButton* runChartButton;
+    algorithm::PopulationManager::ResultsPerIteration calculatedResults;
+    std::unique_ptr<dataplotting::IterationValuePlotter> plotter;
 
 private slots:
     void handleRunButton();
     void handleRunChartButton();
+    void handleRunChartMeanButton();
     void handleSelectionMethodsGroupBox();
 };
