@@ -2,6 +2,9 @@
 
 #include "Bitset.h"
 
+#include <set>
+#include <map>
+
 namespace algorithm
 {
 namespace types
@@ -22,5 +25,8 @@ struct ResultValues
         return z < lhs.z;
     }
 };
+
+using SortedResults = std::set<ResultValues>;
+using ResultsPerIteration = std::map<int, SortedResults>;
 }
 }

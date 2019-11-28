@@ -1,7 +1,7 @@
 #pragma once
 
 #include <random>
-#include "../types/MainTypes.h"
+#include "MainTypes.h"
 
 namespace algorithm
 {

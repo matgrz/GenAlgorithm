@@ -91,6 +91,9 @@
     <ClCompile Include="dataplotting\IterationValuePlotter.cpp">
       <Filter>dataplotting</Filter>
     </ClCompile>
+    <ClCompile Include="dataplotting\DataWriter.cpp">
+      <Filter>dataplotting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="GenAlgorithm.h">
@@ -172,6 +175,9 @@
       <Filter>algorithm\crossover</Filter>
     </ClInclude>
     <ClInclude Include="dataplotting\IterationValuePlotter.h">
+      <Filter>dataplotting</Filter>
+    </ClInclude>
+    <ClInclude Include="dataplotting\DataWriter.h">
       <Filter>dataplotting</Filter>
     </ClInclude>
   </ItemGroup>

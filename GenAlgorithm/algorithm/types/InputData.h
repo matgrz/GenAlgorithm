@@ -20,6 +20,9 @@ struct InputData
     int crossoverProbability;
     Mutations mutationMethod;
     int mutationProbability;
+    float centerX;
+    float centerY;
+    float radius;
 };
 }
 }

@@ -1,7 +1,6 @@
 #include "PointMutator.h"
 
 #include <random>
-#include <iostream>
 
 namespace algorithm
 {

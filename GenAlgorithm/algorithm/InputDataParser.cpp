@@ -1,7 +1,5 @@
 #include "InputDataParser.h"
 
-#include <iostream>
-
 namespace algorithm
 {
 types::InputData InputDataParser::parseData(const Ui::GenAlgorithmClass& ui)
@@ -19,6 +17,9 @@ types::InputData InputDataParser::parseData(const Ui::GenAlgorithmClass& ui)
     inputData.crossoverProbability = ui.textEditCrossoverProbability->toPlainText().toInt();
     inputData.mutationMethod = parseMutationMethod(ui);
     inputData.mutationProbability = ui.textEditMutationProbability->toPlainText().toInt();
+    inputData.centerX = ui.textEditCenterX->toPlainText().toFloat();
+    inputData.centerY = ui.textEditCenterY->toPlainText().toFloat();
+    inputData.radius = ui.textEditRadius->toPlainText().toFloat();
 
     return inputData;
 }

@@ -1,7 +1,6 @@
 #include "OnePointCrossover.h"
 
 #include <random>
-#include <iostream>
 
 namespace algorithm
 {

@@ -1,6 +1,7 @@
 #pragma once
 
-#include "../algorithm/PopulationManager.h"
+//#include "../algorithm/PopulationManager.h"
+#include "MainTypes.h"
 #include <QtCharts>
 
 namespace dataplotting
@@ -8,8 +9,8 @@ namespace dataplotting
 class IterationValuePlotter
 {
 public:
-    using IterationResults = algorithm::PopulationManager::ResultsPerIteration;
-    using SortedResults = algorithm::PopulationManager::SortedResults;
+    using IterationResults = algorithm::types::ResultsPerIteration;
+    using SortedResults = algorithm::types::SortedResults;
 
     ~IterationValuePlotter();
     void plotIterationResults(const IterationResults&);

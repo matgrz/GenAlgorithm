@@ -1,7 +1,6 @@
 #include "PopulationManager.h"
 
 #include <cmath>
-#include <iostream>
 #include <ctime>
 #include <algorithm>
 #include <iterator>
@@ -12,7 +11,11 @@
 namespace algorithm
 {
 PopulationManager::PopulationManager(const types::InputData& input)
-    : input{ input }
+    : input{ input }, 
+      xMin{ input.centerX - input.radius },
+      xMax{ input.centerX + input.radius },
+      yMin{ input.centerY - input.radius },
+      yMax{ input.centerY + input.radius }
 {
     ServicesFactory factory{};
     selector = factory.createSelector(input.selectionMethod, input.selectionParameter);
@@ -21,39 +24,25 @@ PopulationManager::PopulationManager(const types::InputData& input)
     inverter = std::make_unique<Inverter>(input.inversionProbability);
 }
 
-auto PopulationManager::findTheBestSolution() const -> ResultsPerIteration
+types::ResultsPerIteration PopulationManager::findTheBestSolution() const
 {
-    ResultsPerIteration allResults{};
+    types::ResultsPerIteration allResults{};
     auto population = initilizePopulation();
     int iteration{ 0 };
 
     for (;;)
     {
-        std::cout << " ----- ITERATION " << iteration << " ----- \n\n";
-        // 1. evaluation
         auto results = calculateValuesAndStoreIt(population, allResults, iteration);
-
-        // store elites
         auto elites = getElites(results);
 
-        // 2. selection
         auto selectedResults = selector->select(results);
         if (iteration++ == input.generationCount)
             return allResults;
 
-        // 3. crossover
         types::Population selectedPopulation = convertResultsToPopulation(selectedResults);
-
-        // crossover call
         auto populationAfterCrossover = crossover->doCrossover(selectedPopulation);
-
-        // 4. mutation
         mutator->mutatePopulation(populationAfterCrossover);  
-
-        // inversion
         inverter->performInversion(population);
-
-        // add: elite strategy
         population = addElitesToPopulationIfNecessary(populationAfterCrossover, elites);
     }
     // TODO add some exception handling
@@ -78,7 +67,7 @@ types::Population PopulationManager::initilizePopulation() const
 }
 
 std::map<float, types::Point> PopulationManager::calculateValuesAndStoreIt(
-    const types::Population& population, ResultsPerIteration& allResults, const int iteration) const
+    const types::Population& population, types::ResultsPerIteration& allResults, const int iteration) const
 {
     std::map<float, types::Point> values{};
     std::set<types::ResultValues> resultsForThisIteration{};
@@ -86,10 +75,8 @@ std::map<float, types::Point> PopulationManager::calculateValuesAndStoreIt(
     const auto constFactor = (xMax - xMin) / (std::pow(2, calculateBitsetLength()) - 1);
     for (const auto& creature : population)
     {
-        std::cout << "DBG: x str = " << creature.first.toString() << ", y str = " << creature.second.toString() << "\n";
         auto [x, y] = decodeBitsetsToFloats(creature, constFactor);
         float value = calculateValue(x, y);
-        std::cout << "DBG: x = " << x << ", y = " << y << ", value = " << value << "\n";
         values.insert({value, creature});
         resultsForThisIteration.insert(types::ResultValues{x, y, value});
     }

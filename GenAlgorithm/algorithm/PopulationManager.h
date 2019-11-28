@@ -17,17 +17,14 @@ namespace algorithm
 class PopulationManager
 {
 public:
-    using SortedResults = std::set<types::ResultValues>;
-    using ResultsPerIteration = std::map<int, SortedResults>;
-
     PopulationManager(const types::InputData&);
-    ResultsPerIteration findTheBestSolution() const;
+    types::ResultsPerIteration findTheBestSolution() const;
 
 private:
     int calculateBitsetLength() const;
     types::Population initilizePopulation() const;
     std::map<float, types::Point> calculateValuesAndStoreIt(const types::Population&, 
-                                                            ResultsPerIteration&,
+                                                            types::ResultsPerIteration&,
                                                             const int) const;
     types::Population convertResultsToPopulation(const std::map<float, types::Point>&) const;
     float calculateValue(float, float) const;
@@ -40,9 +37,9 @@ private:
     std::unique_ptr<crossover::ICrossover> crossover;
     std::unique_ptr<mutation::IMutator> mutator;
     std::unique_ptr<Inverter> inverter;
-    const float xMin{ -10.0 };
-    const float xMax{ 10.0 };
-    const float yMin{ -10.0 };
-    const float yMax{ 10.0 };
+    const float xMin;
+    const float xMax;
+    const float yMin;
+    const float yMax;
 };
 }
