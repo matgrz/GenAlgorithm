@@ -14,6 +14,7 @@ public:
     ~IterationValuePlotter();
     void plotIterationResults(const IterationResults&);
     void plotMeanValue(const IterationResults&);
+    void plotStdDev(const IterationResults&);
 
 private:
     void clearLayoutIfAlreadyCreated();
@@ -23,6 +24,7 @@ private:
     QChartView* createChartView(float, float, QScatterSeries*);
     std::pair<QValueAxis*, QValueAxis*> createAxes(float, float);
     float calculateMeanValueForSingleIteration(const SortedResults&);
+    float calculateStdDevForSingleIteration(const SortedResults&);
 
     QVBoxLayout* chartLayout{ nullptr };
     QWidget* chartWindow{ nullptr };

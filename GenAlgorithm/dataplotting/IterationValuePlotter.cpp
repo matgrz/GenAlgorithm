@@ -40,6 +40,24 @@ void IterationValuePlotter::plotMeanValue(const IterationResults& calculatedResu
     setLayout(series, maxY, maxX);
 }
 
+void IterationValuePlotter::plotStdDev(const IterationResults& calculatedResults)
+{
+    clearLayoutIfAlreadyCreated();
+    float maxX = calculatedResults.size();
+    float maxY{ 0.0 };
+
+    QScatterSeries* series = new QScatterSeries();
+    for (const auto& resultPair : calculatedResults)
+    {
+        auto stdDev = calculateStdDevForSingleIteration(resultPair.second);
+        series->append(resultPair.first, stdDev);
+
+        if (stdDev > maxY)
+            maxY = stdDev;
+    }
+    setLayout(series, maxY, maxX);
+}
+
 void IterationValuePlotter::clearLayoutIfAlreadyCreated()
 {
     if (chartLayout != nullptr)
@@ -98,10 +116,21 @@ std::pair<QValueAxis*, QValueAxis*> IterationValuePlotter::createAxes(float maxY
 
 float IterationValuePlotter::calculateMeanValueForSingleIteration(const SortedResults& sortedResults)
 {
-    auto sumResults = [](float lhs, algorithm::types::ResultValues rhs) {
+    auto sumResults = [](float lhs, const algorithm::types::ResultValues& rhs) {
                           return lhs + rhs.z;
                       };
     float elementSum = std::accumulate(sortedResults.begin(), sortedResults.end(), 0.0, sumResults);
     return elementSum / sortedResults.size();
+}
+
+float IterationValuePlotter::calculateStdDevForSingleIteration(const SortedResults& sortedResults)
+{
+    const auto meanValue = calculateMeanValueForSingleIteration(sortedResults);
+    auto squareOfDifference = [&meanValue](float lhs, const auto& rhs) {
+        return lhs + std::pow(rhs.z - meanValue, 2);
+    };
+
+    const auto sumOfPow = std::accumulate(sortedResults.begin(), sortedResults.end(), 0.0, squareOfDifference);
+    return std::sqrt(sumOfPow / sortedResults.size());
 }
 }

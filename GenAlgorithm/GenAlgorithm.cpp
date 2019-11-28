@@ -16,6 +16,7 @@ GenAlgorithm::GenAlgorithm(QWidget *parent) : QMainWindow(parent)
     connect(ui.pushButtonRun, SIGNAL(released()), this, SLOT(handleRunButton()));
     connect(ui.pushButtonRunChart, SIGNAL(released()), this, SLOT(handleRunChartButton()));
     connect(ui.pushButtonRunChartMean, SIGNAL(released()), this, SLOT(handleRunChartMeanButton()));
+    connect(ui.pushButtonRunChartStdDev, SIGNAL(released()), this, SLOT(handleRunChartStdDevButton()));
 
     plotter = std::make_unique<dataplotting::IterationValuePlotter>();
 }
@@ -30,6 +31,7 @@ void GenAlgorithm::handleRunButton()
     // TODO make chart generation buttons clickable method
     ui.pushButtonRunChart->setEnabled(true);
     ui.pushButtonRunChartMean->setEnabled(true);
+    ui.pushButtonRunChartStdDev->setEnabled(true);
 
     auto endTime = steady_clock::now();
     std::string elapsedTime = "Elapsed time (miliseconds): " + std::to_string(duration_cast<milliseconds>(endTime - startTime).count());
@@ -54,4 +56,9 @@ void GenAlgorithm::handleRunChartButton()
 void GenAlgorithm::handleRunChartMeanButton()
 {
     plotter->plotMeanValue(calculatedResults);
+}
+
+void GenAlgorithm::handleRunChartStdDevButton()
+{
+    plotter->plotStdDev(calculatedResults);
 }

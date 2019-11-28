@@ -400,7 +400,7 @@
     <property name="geometry">
      <rect>
       <x>490</x>
-      <y>92</y>
+      <y>30</y>
       <width>75</width>
       <height>41</height>
      </rect>
@@ -441,7 +441,7 @@
     <property name="geometry">
      <rect>
       <x>490</x>
-      <y>140</y>
+      <y>80</y>
       <width>75</width>
       <height>41</height>
      </rect>
@@ -449,6 +449,35 @@
     <property name="text">
      <string>Plot mean 
  values</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonRunChartStdDev">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>130</y>
+      <width>75</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Plot standard
+ deviation</string>
     </property>
     <property name="checkable">
      <bool>false</bool>

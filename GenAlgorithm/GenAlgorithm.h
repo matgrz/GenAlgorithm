@@ -24,5 +24,6 @@ private slots:
     void handleRunButton();
     void handleRunChartButton();
     void handleRunChartMeanButton();
+    void handleRunChartStdDevButton();
     void handleSelectionMethodsGroupBox();
 };
