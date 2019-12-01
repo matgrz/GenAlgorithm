@@ -20,9 +20,13 @@ public:
     GenAlgorithm(char* argv[], QWidget *parent = Q_NULLPTR);
 	
 private:
-    void makePlottingButtonsClickable();
+    void runAlgorithm();
+    void makeChartButtonsClickable();
     void saveData();
-    std::string calculateElapsedTime(const TimePoint&, const TimePoint&);
+    void displayElapsedTime(const TimePoint&);
+    void connectSlots();
+    std::string getAppDirectory(char* argv[]);
+    void displayResult();
 
     Ui::GenAlgorithmClass ui;
     algorithm::types::ResultsPerIteration calculatedResults;

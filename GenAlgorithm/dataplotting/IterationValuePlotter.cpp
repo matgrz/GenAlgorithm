@@ -17,9 +17,9 @@ void IterationValuePlotter::plotIterationResults(const IterationResults& calcula
     QScatterSeries* series = new QScatterSeries();
 
     for (const auto& resultPair : calculatedResults)
-        series->append(resultPair.first, resultPair.second.begin()->z);
+        series->append(resultPair.first + 1, resultPair.second.begin()->z);
 
-    setLayout(series, maxY, maxX);
+    setLayout(series, maxY, maxX, "Lowest value for every iteration chart");
 }
 
 void IterationValuePlotter::plotMeanValue(const IterationResults& calculatedResults)
@@ -32,12 +32,12 @@ void IterationValuePlotter::plotMeanValue(const IterationResults& calculatedResu
     for (const auto& resultPair : calculatedResults)
     {
         auto meanValue = calculateMeanValueForSingleIteration(resultPair.second);
-        series->append(resultPair.first, meanValue);
+        series->append(resultPair.first + 1, meanValue);
 
         if (meanValue > maxY)
             maxY = meanValue;
     }
-    setLayout(series, maxY, maxX);
+    setLayout(series, maxY, maxX, "Mean value for every iteration chart");
 }
 
 void IterationValuePlotter::plotStdDev(const IterationResults& calculatedResults)
@@ -50,12 +50,12 @@ void IterationValuePlotter::plotStdDev(const IterationResults& calculatedResults
     for (const auto& resultPair : calculatedResults)
     {
         auto stdDev = calculateStdDevForSingleIteration(resultPair.second);
-        series->append(resultPair.first, stdDev);
+        series->append(resultPair.first + 1, stdDev);
 
         if (stdDev > maxY)
             maxY = stdDev;
     }
-    setLayout(series, maxY, maxX);
+    setLayout(series, maxY, maxX, "Standard deviation for every iteration chart");
 }
 
 void IterationValuePlotter::clearLayoutIfAlreadyCreated()
@@ -72,30 +72,32 @@ std::pair<float, float> IterationValuePlotter::getMaxValuesFromIterationResults(
     return {maxY, maxX};
 }
 
-void IterationValuePlotter::setLayout(QScatterSeries* series, float maxY, float maxX)
+void IterationValuePlotter::setLayout(QScatterSeries* series, float maxY, float maxX, const std::string& title)
 {
     chartWindow = new QWidget(0);
     chartLayout = new QVBoxLayout(chartWindow);
-    chartLayout->addWidget(createChartView(maxY, maxX, series));
+    chartLayout->addWidget(createChartView(maxY, maxX, series, title));
     chartWindow->setLayout(chartLayout);
     chartLayout->activate();
-    chartWindow->resize(800, 640);
+    chartWindow->resize(960, 800);
     chartWindow->show();
 }
 
-QChart* IterationValuePlotter::createChart(QScatterSeries* series)
+QChart* IterationValuePlotter::createChart(QScatterSeries* series, const std::string& title)
 {
     QChart* chart = new QChart();
     chart->legend()->hide();
     chart->addSeries(series);
     chart->createDefaultAxes();
-    chart->setTitle("Lowest value for every iteration chart");
+    chart->setTitle(title.c_str());
+    chart->setTitleFont({ "Times", 14, QFont::Bold });
     return chart;
 }
 
-QChartView* IterationValuePlotter::createChartView(float maxY, float maxX, QScatterSeries* series)
+QChartView* IterationValuePlotter::createChartView(
+    float maxY, float maxX, QScatterSeries* series, const std::string& title)
 {
-    QChartView* chartView = new QChartView(createChart(series));
+    QChartView* chartView = new QChartView(createChart(series, title));
     chartView->setRenderHint(QPainter::Antialiasing);
 
     auto [axisX, axisY] = createAxes(maxY, maxX);
@@ -109,7 +111,14 @@ std::pair<QValueAxis*, QValueAxis*> IterationValuePlotter::createAxes(float maxY
     QValueAxis* axisY = new QValueAxis;
     QValueAxis* axisX = new QValueAxis;
     axisY->setRange(0, maxY * 1.02);
-    axisX->setRange(-0.05, maxX + 0.1);
+    axisX->setRange(0, maxX + 1);
+    axisY->setMinorTickCount(10);
+    axisX->setTickAnchor(0.0);
+    axisX->setTickCount(maxX + 2);
+    axisY->setTitleText("Value");
+    axisX->setTitleText("Iteration");
+    axisY->setTitleFont({ "Times", 10, QFont::Bold });
+    axisX->setTitleFont({ "Times", 10, QFont::Bold });
 
     return { axisX, axisY };
 }

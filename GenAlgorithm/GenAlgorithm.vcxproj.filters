@@ -94,6 +94,9 @@
     <ClCompile Include="dataplotting\DataWriter.cpp">
       <Filter>dataplotting</Filter>
     </ClCompile>
+    <ClCompile Include="algorithm\types\Bitset.cpp">
+      <Filter>algorithm\types</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="GenAlgorithm.h">

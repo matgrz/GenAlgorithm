@@ -1,6 +1,5 @@
 #pragma once
 
-//#include "../algorithm/PopulationManager.h"
 #include "MainTypes.h"
 #include <QtCharts>
 
@@ -20,9 +19,9 @@ public:
 private:
     void clearLayoutIfAlreadyCreated();
     std::pair<float, float> getMaxValuesFromIterationResults(const IterationResults&);
-    void setLayout(QScatterSeries*, float, float);
-    QChart* createChart(QScatterSeries*);
-    QChartView* createChartView(float, float, QScatterSeries*);
+    void setLayout(QScatterSeries*, float, float, const std::string&);
+    QChart* createChart(QScatterSeries*, const std::string&);
+    QChartView* createChartView(float, float, QScatterSeries*, const std::string&);
     std::pair<QValueAxis*, QValueAxis*> createAxes(float, float);
     float calculateMeanValueForSingleIteration(const SortedResults&);
     float calculateStdDevForSingleIteration(const SortedResults&);

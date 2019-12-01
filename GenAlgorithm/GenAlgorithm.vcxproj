@@ -55,7 +55,7 @@
   </PropertyGroup>
   <PropertyGroup Label="QtSettings" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <QtInstall>msvc2017_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>charts;core;gui;widgets</QtModules>
   </PropertyGroup>
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
     <Import Project="$(QtMsBuild)\qt.props" />
@@ -80,8 +80,10 @@
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DebugInformationFormat />
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <AdditionalIncludeDirectories>$(Qt_INCLUDEPATH_);%(AdditionalIncludeDirectories);$(ProjectDir)\algorithm\types</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -103,6 +105,7 @@
     <ClCompile Include="algorithm\selection\RouletteSelector.cpp" />
     <ClCompile Include="algorithm\selection\TournamentSelector.cpp" />
     <ClCompile Include="algorithm\ServicesFactory.cpp" />
+    <ClCompile Include="algorithm\types\Bitset.cpp" />
     <ClCompile Include="dataplotting\DataWriter.cpp" />
     <ClCompile Include="dataplotting\IterationValuePlotter.cpp" />
     <ClCompile Include="GenAlgorithm.cpp" />

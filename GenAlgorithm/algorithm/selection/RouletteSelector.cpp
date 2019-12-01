@@ -7,7 +7,8 @@ namespace algorithm
 {
 namespace selection
 {
-RouletteSelector::RouletteSelector(int killCount) : killCount{killCount}
+RouletteSelector::RouletteSelector(int killCountPercentage) 
+    : killCountPercentage{ killCountPercentage }
 {
 }
 std::map<float, types::Point> RouletteSelector::select(const std::map<float, types::Point>& results) const
@@ -25,7 +26,7 @@ std::vector<float> RouletteSelector::getDistributions(const std::map<float, type
     std::vector<float> distributions{ weights.front() };
     for (int index = 1; index < resultsBeforeRoulette.size() - 1; index++)
     {
-    distributions.push_back(distributions[index - 1] + weights[index]);
+        distributions.push_back(distributions[index - 1] + weights[index]);
     }
     distributions.push_back(1.0);
 
@@ -53,9 +54,11 @@ std::vector<float> RouletteSelector::calculateWeights(
     return weights;
 }
 
-std::set<int> RouletteSelector::getIndexesToKill(const std::vector<float>& distributions) const
+std::set<int> RouletteSelector::getIndexesToKill(const std::vector<float>& distributions, 
+                                                 const int creatureCount) const
 {
     std::set<int> indexesToKill{};
+    auto killCount = (killCountPercentage / 100) * creatureCount;
 
     for (int iteration = 0; iteration < killCount; iteration++)
     {
@@ -83,7 +86,7 @@ std::map<float, types::Point> RouletteSelector::getResultsToBeRemoved(
     const std::map<float, types::Point>& results, 
     const std::vector<float>& distributions) const
 {
-    auto indexesToKill = getIndexesToKill(distributions);
+    auto indexesToKill = getIndexesToKill(distributions, results.size());
     std::map<float, types::Point> resultsToRemove{};
 
     for (const auto& indexToKill : indexesToKill)

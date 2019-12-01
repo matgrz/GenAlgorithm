@@ -4,7 +4,7 @@
 #include <ctime>
 #include <algorithm>
 #include <iterator>
-
+    
 #include "selection/BestIndividualSelector.h"
 #include "ServicesFactory.h"
 
@@ -45,7 +45,6 @@ types::ResultsPerIteration PopulationManager::findTheBestSolution() const
         inverter->performInversion(population);
         population = addElitesToPopulationIfNecessary(populationAfterCrossover, elites);
     }
-    // TODO add some exception handling
     return {};
 }
 
