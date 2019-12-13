@@ -4,13 +4,12 @@
 
 TEMPLATE = app
 TARGET = GenAlgorithm
-DESTDIR = ../x64/Debug
-CONFIG += debug console
+DESTDIR = ../x64/Release
+CONFIG += release, static
 LIBS += -L"."
 DEPENDPATH += .
 MOC_DIR += .
-OBJECTS_DIR += debug
+OBJECTS_DIR += release
 UI_DIR += .
 RCC_DIR += .
-QT += datavisualization
 include(GenAlgorithm.pri)

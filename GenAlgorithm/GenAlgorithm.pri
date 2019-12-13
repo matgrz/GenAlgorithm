@@ -9,6 +9,7 @@ message("You are running qmake on a generated .pro file. This may not work!")
 
 HEADERS += ./GenAlgorithm.h \
     ./algorithm/InputDataParser.h \
+    ./algorithm/Inverter.h \
     ./algorithm/PopulationManager.h \
     ./algorithm/ServicesFactory.h \
     ./algorithm/types/Bitset.h \
@@ -19,21 +20,34 @@ HEADERS += ./GenAlgorithm.h \
     ./algorithm/types/SelectionMethods.h \
     ./algorithm/selection/BestIndividualSelector.h \
     ./algorithm/selection/ISelector.h \
+    ./algorithm/selection/RouletteSelector.h \
     ./algorithm/selection/TournamentSelector.h \
+    ./algorithm/crossover/HomogeneousCrossover.h \
     ./algorithm/crossover/ICrossover.h \
     ./algorithm/crossover/OnePointCrossover.h \
+    ./algorithm/crossover/TwoPointCrossover.h \
     ./algorithm/mutation/BoundaryMutator.h \
     ./algorithm/mutation/IMutator.h \
-    ./algorithm/mutation/OnePointMutator.h
+    ./algorithm/mutation/PointMutator.h \
+    ./dataplotting/DataWriter.h \
+    ./dataplotting/IterationValuePlotter.h
 SOURCES += ./GenAlgorithm.cpp \
     ./main.cpp \
     ./algorithm/InputDataParser.cpp \
+    ./algorithm/Inverter.cpp \
     ./algorithm/PopulationManager.cpp \
     ./algorithm/ServicesFactory.cpp \
+    ./algorithm/types/Bitset.cpp \
     ./algorithm/selection/BestIndividualSelector.cpp \
+    ./algorithm/selection/RouletteSelector.cpp \
     ./algorithm/selection/TournamentSelector.cpp \
+    ./algorithm/crossover/HomogeneousCrossover.cpp \
+    ./algorithm/crossover/ICrossover.cpp \
     ./algorithm/crossover/OnePointCrossover.cpp \
+    ./algorithm/crossover/TwoPointCrossover.cpp \
     ./algorithm/mutation/BoundaryMutator.cpp \
-    ./algorithm/mutation/OnePointMutator.cpp
+    ./algorithm/mutation/PointMutator.cpp \
+    ./dataplotting/DataWriter.cpp \
+    ./dataplotting/IterationValuePlotter.cpp
 FORMS += ./GenAlgorithm.ui
 RESOURCES += GenAlgorithm.qrc
