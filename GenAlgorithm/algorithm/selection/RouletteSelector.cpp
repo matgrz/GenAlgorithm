@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <random>
+#include <numeric>
 
 namespace algorithm
 {

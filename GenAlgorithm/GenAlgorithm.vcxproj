@@ -86,26 +86,23 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="algorithm\crossover\HomogeneousCrossover.cpp" />
+    <ClCompile Include="algorithm\crossover\ArithmeticCrossover.cpp" />
+    <ClCompile Include="algorithm\crossover\HeuristicCrossover.cpp" />
     <ClCompile Include="algorithm\crossover\ICrossover.cpp" />
-    <ClCompile Include="algorithm\crossover\OnePointCrossover.cpp" />
-    <ClCompile Include="algorithm\crossover\TwoPointCrossover.cpp" />
     <ClCompile Include="algorithm\InputDataParser.cpp" />
-    <ClCompile Include="algorithm\Inverter.cpp" />
-    <ClCompile Include="algorithm\mutation\BoundaryMutator.cpp" />
-    <ClCompile Include="algorithm\mutation\PointMutator.cpp" />
+    <ClCompile Include="algorithm\mutation\IndexChangeMutator.cpp" />
+    <ClCompile Include="algorithm\mutation\UniformMutator.cpp" />
     <ClCompile Include="algorithm\PopulationManager.cpp" />
     <ClCompile Include="algorithm\selection\BestIndividualSelector.cpp" />
     <ClCompile Include="algorithm\selection\RouletteSelector.cpp" />
     <ClCompile Include="algorithm\selection\TournamentSelector.cpp" />
     <ClCompile Include="algorithm\ServicesFactory.cpp" />
-    <ClCompile Include="algorithm\types\Bitset.cpp" />
     <ClCompile Include="dataplotting\DataWriter.cpp" />
     <ClCompile Include="dataplotting\IterationValuePlotter.cpp" />
     <ClCompile Include="GenAlgorithm.cpp" />
@@ -121,22 +118,18 @@
     <QtRcc Include="GenAlgorithm.qrc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="algorithm\crossover\HomogeneousCrossover.h" />
+    <ClInclude Include="algorithm\crossover\ArithmeticCrossover.h" />
+    <ClInclude Include="algorithm\crossover\HeuristicCrossover.h" />
     <ClInclude Include="algorithm\crossover\ICrossover.h" />
-    <ClInclude Include="algorithm\crossover\OnePointCrossover.h" />
-    <ClInclude Include="algorithm\crossover\TwoPointCrossover.h" />
     <ClInclude Include="algorithm\InputDataParser.h" />
-    <ClInclude Include="algorithm\Inverter.h" />
-    <ClInclude Include="algorithm\mutation\BoundaryMutator.h" />
     <ClInclude Include="algorithm\mutation\IMutator.h" />
-    <ClInclude Include="algorithm\mutation\PointMutator.h" />
+    <ClInclude Include="algorithm\mutation\UniformMutator.h" />
     <ClInclude Include="algorithm\PopulationManager.h" />
     <ClInclude Include="algorithm\selection\BestIndividualSelector.h" />
     <ClInclude Include="algorithm\selection\ISelector.h" />
     <ClInclude Include="algorithm\selection\RouletteSelector.h" />
     <ClInclude Include="algorithm\selection\TournamentSelector.h" />
     <ClInclude Include="algorithm\ServicesFactory.h" />
-    <ClInclude Include="algorithm\types\Bitset.h" />
     <ClInclude Include="algorithm\types\InputData.h" />
     <ClInclude Include="algorithm\types\MainTypes.h" />
     <ClInclude Include="algorithm\types\Mutations.h" />
@@ -144,6 +137,9 @@
     <ClInclude Include="algorithm\types\SelectionMethods.h" />
     <ClInclude Include="dataplotting\DataWriter.h" />
     <ClInclude Include="dataplotting\IterationValuePlotter.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="algorithm\mutation\IndexChangeMutator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

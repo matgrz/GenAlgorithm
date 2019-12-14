@@ -3,11 +3,10 @@
 #include "selection/BestIndividualSelector.h"
 #include "selection/RouletteSelector.h"
 #include "selection/TournamentSelector.h"
-#include "crossover/OnePointCrossover.h"
-#include "crossover/TwoPointCrossover.h"
-#include "crossover/HomogeneousCrossover.h"
-#include "mutation/BoundaryMutator.h"
-#include "mutation/PointMutator.h"
+#include "crossover/ArithmeticCrossover.h"
+#include "mutation/UniformMutator.h"
+#include "crossover/HeuristicCrossover.h"
+#include "mutation/IndexChangeMutator.h"
 
 namespace algorithm
 {
@@ -30,23 +29,21 @@ ServicesFactory::createCrossover(types::Crossovers crossoverType, int crossoverP
 {
     switch (crossoverType)
     {
-    case types::Crossovers::ONE_POINT:
-        return std::make_unique<crossover::OnePointCrossover>(crossoverProbability);
-    case types::Crossovers::TWO_POINT:
-        return std::make_unique<crossover::TwoPointCrossover>(crossoverProbability);
+    case types::Crossovers::ARITHMETIC:
+        return std::make_unique<crossover::ArithmeticCrossover>(crossoverProbability);
     default:
-        return std::make_unique<crossover::HomogeneousCrossover>(crossoverProbability);
+        return std::make_unique<crossover::HeuristicCrossover>(crossoverProbability);
     }
 }
 std::unique_ptr<mutation::IMutator>
-ServicesFactory::createMutator(types::Mutations mutationType, int mutationProbability)
+ServicesFactory::createMutator(types::Mutations mutationType, int mutationProbability, float xMin, float xMax)
 {
     switch (mutationType)
     {
-    case types::Mutations::BOUNDARY:
-        return std::make_unique<mutation::BoundaryMutator>(mutationProbability);
+    case types::Mutations::UNIFORM:
+        return std::make_unique<mutation::UniformMutator>(mutationProbability, xMin, xMax);
     default:
-        return std::make_unique<mutation::PointMutator>(mutationProbability, mutationType);
+        return std::make_unique<mutation::IndexChangeMutator>(mutationProbability);
     }
 }
 }

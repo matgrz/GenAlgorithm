@@ -25,6 +25,7 @@ protected:
         crossoverTwoCreatures(const types::Point&, const types::Point&) = 0;
     int getIndexOfRandomCreatureWorseThanCurrent(int, int);
     bool isCrossoverPicked();
+    float getValueFromZeroToOne() const;
 
     int crossoverPercentage;
 };

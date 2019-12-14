@@ -1,17 +1,14 @@
 #pragma once
 
-#include "Bitset.h"
-
 #include <set>
 #include <map>
+#include <vector>
 
 namespace algorithm
 {
 namespace types
 {
-using xValues = types::Bitset;
-using yValues = types::Bitset;
-using Point = std::pair<xValues, yValues>;
+using Point = std::pair<float, float>;
 using Population = std::vector<Point>;
 
 struct ResultValues

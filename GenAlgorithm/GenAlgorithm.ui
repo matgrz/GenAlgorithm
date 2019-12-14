@@ -273,10 +273,10 @@ p, li { white-space: pre-wrap; }
       </rect>
      </property>
      <property name="text">
-      <string>One point</string>
+      <string>Arithmetic</string>
      </property>
      <property name="checked">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="radioButtonRecomb2">
@@ -289,26 +289,10 @@ p, li { white-space: pre-wrap; }
       </rect>
      </property>
      <property name="text">
-      <string>Two points</string>
+      <string>Heuristic</string>
      </property>
      <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="radioButtonRecomb4">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>60</y>
-       <width>82</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Homogenous</string>
+      <bool>false</bool>
      </property>
     </widget>
     <widget class="QTextEdit" name="textEditCrossoverProbability">
@@ -372,10 +356,10 @@ p, li { white-space: pre-wrap; }
       </rect>
      </property>
      <property name="text">
-      <string>Boundary</string>
+      <string>Uniform</string>
      </property>
      <property name="checked">
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QRadioButton" name="radioButtonMutation2">
@@ -383,31 +367,15 @@ p, li { white-space: pre-wrap; }
       <rect>
        <x>10</x>
        <y>40</y>
-       <width>82</width>
+       <width>101</width>
        <height>17</height>
       </rect>
      </property>
      <property name="text">
-      <string>One point</string>
+      <string>Index Change</string>
      </property>
      <property name="checked">
       <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QRadioButton" name="radioButtonMutation3">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>60</y>
-       <width>82</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Two points</string>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
      </property>
     </widget>
     <widget class="QLabel" name="labelMutationInfo">

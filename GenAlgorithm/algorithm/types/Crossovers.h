@@ -6,9 +6,8 @@ namespace types
 {
     enum class Crossovers
     {
-        ONE_POINT = 0,
-        TWO_POINT,
-        HOMOGENEOUS
+        ARITHMETIC = 0,
+        HEURISTIC
     };
 }
 }

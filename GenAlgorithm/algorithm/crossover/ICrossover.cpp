@@ -13,6 +13,15 @@ bool CrossoverProvider::isCrossoverPicked()
     return std::rand() % 100 < crossoverPercentage;
 }
 
+float CrossoverProvider::getValueFromZeroToOne() const
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> distance(0.0, 1.0);
+
+    return distance(gen);
+}
+
 int CrossoverProvider::getIndexOfRandomCreatureWorseThanCurrent(int popSize, int index)
 {
     int randomIndexBase = std::rand() % (popSize - index);

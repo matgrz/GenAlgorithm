@@ -35,19 +35,15 @@ types::SelectionMethods InputDataParser::parseSelectionMethod(const Ui::GenAlgor
 types::Crossovers InputDataParser::parseCrossoverMethod(const Ui::GenAlgorithmClass& ui)
 {
     if (ui.radioButtonRecomb1->isChecked())
-        return types::Crossovers::ONE_POINT;
-    else if (ui.radioButtonRecomb2->isChecked())
-        return types::Crossovers::TWO_POINT;
+        return types::Crossovers::ARITHMETIC;
     else
-        return types::Crossovers::HOMOGENEOUS;
+        return types::Crossovers::HEURISTIC;
 }
 types::Mutations InputDataParser::parseMutationMethod(const Ui::GenAlgorithmClass& ui)
 {
     if (ui.radioButtonMutation1->isChecked())
-        return types::Mutations::BOUNDARY;
-    else if (ui.radioButtonMutation2->isChecked())
-        return types::Mutations::ONE_POINT;
+        return types::Mutations::UNIFORM;
     else
-        return types::Mutations::TWO_POINT;
+        return types::Mutations::INDEX_CHANGE;
 }
 }

@@ -6,9 +6,8 @@ namespace types
 {
 enum class Mutations
 {
-    BOUNDARY = 0,
-    ONE_POINT,
-    TWO_POINT
+    UNIFORM = 0,
+    INDEX_CHANGE
 };
 }
 }

@@ -4,6 +4,8 @@
 #include <ctime>
 #include <algorithm>
 #include <iterator>
+#include <iostream>
+#include <random>
     
 #include "selection/BestIndividualSelector.h"
 #include "ServicesFactory.h"
@@ -20,14 +22,18 @@ PopulationManager::PopulationManager(const types::InputData& input)
     ServicesFactory factory{};
     selector = factory.createSelector(input.selectionMethod, input.selectionParameter);
     crossover = factory.createCrossover(input.crossoverMethod, input.crossoverProbability);
-    mutator = factory.createMutator(input.mutationMethod, input.mutationProbability);
-    inverter = std::make_unique<Inverter>(input.inversionProbability);
+    mutator = factory.createMutator(input.mutationMethod, input.mutationProbability, xMin, xMax);
+    std::srand(std::time(nullptr));
 }
 
 types::ResultsPerIteration PopulationManager::findTheBestSolution() const
 {
     types::ResultsPerIteration allResults{};
+    std::cout << "init pop\n";
     auto population = initilizePopulation();
+    for (const auto& creature : population)
+        std::cout << "x = " << creature.first << "\n";
+
     int iteration{ 0 };
 
     for (;;)
@@ -37,12 +43,28 @@ types::ResultsPerIteration PopulationManager::findTheBestSolution() const
 
         auto selectedResults = selector->select(results);
         if (iteration++ == input.generationCount)
+        {
+            std::cout << "leaving loop\n";
             return allResults;
-
+        }
         types::Population selectedPopulation = convertResultsToPopulation(selectedResults);
+        
+        std::cout << "\nafter selection\n";
+        for (const auto& creature : selectedPopulation)
+            std::cout << "x = " << creature.first << "\n";
+
         auto populationAfterCrossover = crossover->doCrossover(selectedPopulation);
+
+        std::cout << "\nafter crossover\n";
+        for (const auto& creature : populationAfterCrossover)
+            std::cout << "x = " << creature.first << ", y = " << creature.second << "\n";
+
         mutator->mutatePopulation(populationAfterCrossover);  
-        inverter->performInversion(population);
+
+        std::cout << "\nafter mutation\n";
+        for (const auto& creature : populationAfterCrossover)
+            std::cout << "x = " << creature.first << ", y = " << creature.second << "\n";
+
         population = addElitesToPopulationIfNecessary(populationAfterCrossover, elites);
     }
     return {};
@@ -55,12 +77,13 @@ int PopulationManager::calculateBitsetLength() const
 
 types::Population PopulationManager::initilizePopulation() const
 {
-    const int bitsetLength = calculateBitsetLength();
     std::vector<types::Point> population{};
-    std::srand(std::time(nullptr));
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> dist(xMin, xMax);
 
     for (int creature = 0; creature < input.populationSize; creature++)
-        population.push_back({ types::Bitset{bitsetLength}, types::Bitset{bitsetLength} });
+        population.push_back({ dist(gen), dist(gen) });
 	
     return population;
 }
@@ -74,10 +97,9 @@ std::map<float, types::Point> PopulationManager::calculateValuesAndStoreIt(
     const auto constFactor = (xMax - xMin) / (std::pow(2, calculateBitsetLength()) - 1);
     for (const auto& creature : population)
     {
-        auto [x, y] = decodeBitsetsToFloats(creature, constFactor);
-        float value = calculateValue(x, y);
+        float value = calculateValue(creature.first, creature.second);
         values.insert({value, creature});
-        resultsForThisIteration.insert(types::ResultValues{x, y, value});
+        resultsForThisIteration.insert(types::ResultValues{ creature.first, creature.second, value});
     }
     allResults[iteration] = resultsForThisIteration;
     return values;
@@ -100,13 +122,13 @@ float PopulationManager::calculateValue(float x, float y) const
     return std::pow(x, 2) + 2 * std::pow(y, 2) - 0.3 * std::cos(3 * 3.14 * x) * std::cos(4 * 3.14 * y) + 0.3;
 }
 
-std::pair<float, float>
-PopulationManager::decodeBitsetsToFloats(const types::Point& creature, float constFactor) const
-{
-    auto x = xMin + creature.first.toDecimal() * constFactor;
-    auto y = xMin + creature.second.toDecimal() * constFactor;
-    return {x, y};
-}
+//std::pair<float, float>
+//PopulationManager::decodeBitsetsToFloats(const types::Point& creature, float constFactor) const
+//{
+//    auto x = xMin + creature.first.toDecimal() * constFactor;
+//    auto y = xMin + creature.second.toDecimal() * constFactor;
+//    return {x, y};
+//}
 
 types::Population PopulationManager::getElites(const std::map<float, types::Point>& results) const
 {
