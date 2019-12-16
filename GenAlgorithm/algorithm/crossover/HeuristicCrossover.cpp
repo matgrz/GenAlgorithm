@@ -1,5 +1,4 @@
 #include "HeuristicCrossover.h"
-#include <iostream>
 
 namespace algorithm
 {
@@ -10,14 +9,14 @@ HeuristicCrossover::HeuristicCrossover(int crossoverPercentage)
 {
 }
 
-std::pair<types::Point, types::Point> HeuristicCrossover::crossoverTwoCreatures(const types::Point& firstParent, const types::Point& secondParent)
+CrossoverProvider::Children HeuristicCrossover::crossoverTwoCreatures(const types::Point& firstParent, const types::Point& secondParent)
 {
     if (isCrossoverPossible(firstParent, secondParent))
         return doCrossover(firstParent, secondParent);
     else if (isCrossoverPossible(secondParent, firstParent))
         return doCrossover(secondParent, firstParent);
 
-    return {};
+    return std::nullopt;
 }
 
 bool HeuristicCrossover::isCrossoverPossible(const types::Point& lesserParent, const types::Point& greaterParent)
@@ -31,9 +30,8 @@ std::pair<types::Point, types::Point> HeuristicCrossover::doCrossover(const type
     types::Point firstChild;
     types::Point secondChild;
 
-    std::cout << "Doing crossover\n";
-    firstChild.first = k * (greaterParent.first - lesserParent.first) - lesserParent.first;
-    firstChild.second = k * (greaterParent.second - lesserParent.second) - lesserParent.second;
+    firstChild.first = k * (greaterParent.first - lesserParent.first) + greaterParent.first;
+    firstChild.second = k * (greaterParent.second - lesserParent.second) + greaterParent.second;
     secondChild.first = firstChild.second;
     secondChild.second = firstChild.first;
 

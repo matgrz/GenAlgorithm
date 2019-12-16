@@ -4,7 +4,6 @@
 #include <ctime>
 #include <algorithm>
 #include <iterator>
-#include <iostream>
 #include <random>
     
 #include "selection/BestIndividualSelector.h"
@@ -29,50 +28,24 @@ PopulationManager::PopulationManager(const types::InputData& input)
 types::ResultsPerIteration PopulationManager::findTheBestSolution() const
 {
     types::ResultsPerIteration allResults{};
-    std::cout << "init pop\n";
     auto population = initilizePopulation();
-    for (const auto& creature : population)
-        std::cout << "x = " << creature.first << "\n";
-
     int iteration{ 0 };
 
     for (;;)
     {
         auto results = calculateValuesAndStoreIt(population, allResults, iteration);
         auto elites = getElites(results);
-
         auto selectedResults = selector->select(results);
+
         if (iteration++ == input.generationCount)
-        {
-            std::cout << "leaving loop\n";
             return allResults;
-        }
-        types::Population selectedPopulation = convertResultsToPopulation(selectedResults);
-        
-        std::cout << "\nafter selection\n";
-        for (const auto& creature : selectedPopulation)
-            std::cout << "x = " << creature.first << "\n";
 
+        auto selectedPopulation = convertResultsToPopulation(selectedResults);
         auto populationAfterCrossover = crossover->doCrossover(selectedPopulation);
-
-        std::cout << "\nafter crossover\n";
-        for (const auto& creature : populationAfterCrossover)
-            std::cout << "x = " << creature.first << ", y = " << creature.second << "\n";
-
         mutator->mutatePopulation(populationAfterCrossover);  
-
-        std::cout << "\nafter mutation\n";
-        for (const auto& creature : populationAfterCrossover)
-            std::cout << "x = " << creature.first << ", y = " << creature.second << "\n";
-
+        adjustPopulationSize(populationAfterCrossover);
         population = addElitesToPopulationIfNecessary(populationAfterCrossover, elites);
     }
-    return {};
-}
-
-int PopulationManager::calculateBitsetLength() const
-{	
-    return std::ceil(std::log2((xMax - xMin) * std::pow(10, input.accuracy)) + std::log2(1));
 }
 
 types::Population PopulationManager::initilizePopulation() const
@@ -94,7 +67,6 @@ std::map<float, types::Point> PopulationManager::calculateValuesAndStoreIt(
     std::map<float, types::Point> values{};
     std::set<types::ResultValues> resultsForThisIteration{};
 
-    const auto constFactor = (xMax - xMin) / (std::pow(2, calculateBitsetLength()) - 1);
     for (const auto& creature : population)
     {
         float value = calculateValue(creature.first, creature.second);
@@ -122,14 +94,6 @@ float PopulationManager::calculateValue(float x, float y) const
     return std::pow(x, 2) + 2 * std::pow(y, 2) - 0.3 * std::cos(3 * 3.14 * x) * std::cos(4 * 3.14 * y) + 0.3;
 }
 
-//std::pair<float, float>
-//PopulationManager::decodeBitsetsToFloats(const types::Point& creature, float constFactor) const
-//{
-//    auto x = xMin + creature.first.toDecimal() * constFactor;
-//    auto y = xMin + creature.second.toDecimal() * constFactor;
-//    return {x, y};
-//}
-
 types::Population PopulationManager::getElites(const std::map<float, types::Point>& results) const
 {
     types::Population elites{};
@@ -151,5 +115,11 @@ types::Population PopulationManager::addElitesToPopulationIfNecessary(
     }
 
     return population;
+}
+void PopulationManager::adjustPopulationSize(types::Population& population) const
+{
+    if (population.size() > input.populationSize)
+        population.erase(population.begin() + input.populationSize, population.end());
+
 }
 }

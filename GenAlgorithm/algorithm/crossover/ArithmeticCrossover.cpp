@@ -9,8 +9,7 @@ ArithmeticCrossover::ArithmeticCrossover(int crossoverPercentage)
 {
 }
 
-std::pair<types::Point, types::Point>
-ArithmeticCrossover::crossoverTwoCreatures(const types::Point& firstParent, const types::Point& secondParent)
+CrossoverProvider::Children ArithmeticCrossover::crossoverTwoCreatures(const types::Point& firstParent, const types::Point& secondParent)
 {
     const auto k = getValueFromZeroToOne();
     types::Point firstChild;
@@ -21,7 +20,7 @@ ArithmeticCrossover::crossoverTwoCreatures(const types::Point& firstParent, cons
 
     secondChild.first = (1.0 - k) * firstParent.first + k * firstParent.first;
     secondChild.second = (1.0 - k) * firstParent.second + k * firstParent.second;
-    return {firstChild, secondChild};
+    return { { firstChild, secondChild } };
 }
 }
 }

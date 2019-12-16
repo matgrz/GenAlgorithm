@@ -39,10 +39,13 @@ types::Population CrossoverProvider::doCrossover(const types::Population& popula
         if (isCrossoverPicked())
         {
             int partnerIndex = getIndexOfRandomCreatureWorseThanCurrent(popSize, index);
-            auto [firstNewCreature, secondNewCreature] =
-                crossoverTwoCreatures(population[index], population[partnerIndex]);
-            newPopulation.push_back(firstNewCreature);
-            newPopulation.push_back(secondNewCreature);
+            auto optionalChildren = crossoverTwoCreatures(population[index], population[partnerIndex]);
+            
+            if (optionalChildren)
+            {
+                newPopulation.push_back(optionalChildren->first);
+                newPopulation.push_back(optionalChildren->second);
+            }
         }
     }
     std::copy(population.begin(), population.end(), std::back_inserter(newPopulation));

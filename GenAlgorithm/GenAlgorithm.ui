@@ -23,31 +23,6 @@
    <string/>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTextEdit" name="textEditAccuracy">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>81</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>16</pointsize>
-     </font>
-    </property>
-    <property name="html">
-     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:16pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;6&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="placeholderText">
-     <string/>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButtonRun">
     <property name="geometry">
      <rect>
@@ -64,7 +39,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextEdit" name="textEditPopulationSize">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>160</x>
       <y>60</y>
       <width>81</width>
       <height>41</height>
@@ -89,7 +64,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextEdit" name="textEditGenerationCount">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>160</x>
       <y>110</y>
       <width>81</width>
       <height>41</height>
@@ -111,8 +86,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextEdit" name="textEditStrategyPercent">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>60</y>
+      <x>160</x>
+      <y>10</y>
       <width>81</width>
       <height>41</height>
      </rect>
@@ -131,28 +106,6 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="placeholderText">
      <string/>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEditInversionProbability">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>10</y>
-      <width>81</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>16</pointsize>
-     </font>
-    </property>
-    <property name="html">
-     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:16pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QGroupBox" name="groupBoxSelectionMethods">
@@ -412,23 +365,10 @@ p, li { white-space: pre-wrap; }
      </property>
     </widget>
    </widget>
-   <widget class="QLabel" name="labelAccuracy">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>20</y>
-      <width>47</width>
-      <height>13</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Accuracy</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="labelPopSize">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>250</x>
       <y>60</y>
       <width>91</width>
       <height>31</height>
@@ -441,7 +381,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="labelIterCount">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>250</x>
       <y>110</y>
       <width>91</width>
       <height>31</height>
@@ -451,24 +391,11 @@ p, li { white-space: pre-wrap; }
      <string>Iteration count</string>
     </property>
    </widget>
-   <widget class="QLabel" name="labelIterCount_">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>10</y>
-      <width>141</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Inversion probability [%]</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="labelElitism">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>60</y>
+      <x>250</x>
+      <y>10</y>
       <width>121</width>
       <height>41</height>
      </rect>
@@ -592,7 +519,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextEdit" name="textEditRadius">
     <property name="geometry">
      <rect>
-      <x>520</x>
+      <x>400</x>
       <y>110</y>
       <width>81</width>
       <height>41</height>
@@ -614,7 +541,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="labelPopSize_2">
     <property name="geometry">
      <rect>
-      <x>610</x>
+      <x>490</x>
       <y>60</y>
       <width>111</width>
       <height>31</height>
@@ -627,7 +554,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextEdit" name="textEditCenterY">
     <property name="geometry">
      <rect>
-      <x>520</x>
+      <x>400</x>
       <y>60</y>
       <width>81</width>
       <height>41</height>
@@ -652,7 +579,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="labelCenterX">
     <property name="geometry">
      <rect>
-      <x>610</x>
+      <x>490</x>
       <y>20</y>
       <width>111</width>
       <height>16</height>
@@ -665,7 +592,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextEdit" name="textEditCenterX">
     <property name="geometry">
      <rect>
-      <x>520</x>
+      <x>400</x>
       <y>10</y>
       <width>81</width>
       <height>41</height>
@@ -690,7 +617,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="labelIterCount_2">
     <property name="geometry">
      <rect>
-      <x>610</x>
+      <x>490</x>
       <y>110</y>
       <width>121</width>
       <height>31</height>

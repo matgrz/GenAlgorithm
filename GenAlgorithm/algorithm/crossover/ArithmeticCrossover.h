@@ -12,7 +12,7 @@ public:
     ArithmeticCrossover(int crossoverPercentage);
 
 private:
-    std::pair<types::Point, types::Point> crossoverTwoCreatures(const types::Point&, const types::Point&) override;
+    Children crossoverTwoCreatures(const types::Point&, const types::Point&) override;
 };
 }
 }

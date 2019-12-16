@@ -6,10 +6,8 @@ types::InputData InputDataParser::parseData(const Ui::GenAlgorithmClass& ui)
 {
     types::InputData inputData{};
 
-    inputData.accuracy = ui.textEditAccuracy->toPlainText().toInt();
     inputData.populationSize = ui.textEditPopulationSize->toPlainText().toInt();
     inputData.generationCount = ui.textEditGenerationCount->toPlainText().toInt();
-    inputData.inversionProbability = ui.textEditInversionProbability->toPlainText().toInt();
     inputData.strategyPercent = ui.textEditStrategyPercent->toPlainText().toInt();
     inputData.selectionMethod = parseSelectionMethod(ui);
     inputData.selectionParameter = ui.textEditSelectionParam->toPlainText().toInt();
